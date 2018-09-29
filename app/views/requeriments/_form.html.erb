@@ -1,0 +1,50 @@
+<%= simple_nested_form_for(@requeriment) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row-fluid"><div class="span6"><%= f.input :reference, label: "Nro. de referencia" %></div></div>
+    <div class="row-fluid"><div class="span12"><%= f.input :deadline, as: :datepicker %></div></div>
+    <div class="row-fluid"><div class="span8"><%= f.input :description, label: 'Titulo:', input_html: {class: 'span8'} %></div></div>
+
+    <div class="row-fluid"><div class="span12">
+      <% if current_user.super_admin? %>
+        <%= f.association :area, input_html: {class: 'span12'} %>
+      <% else %>
+        <%= f.association :area, selected: current_user.area.id, input_html: {class: 'span12'} %>
+      <% end %>
+    </div></div>
+
+    <% if current_user.administrator? || current_user.super_admin? %>
+      <%= f.input :type_requeriment, collection: [["Bienes", 1], ["Servicios", 2]], as: :radio_buttons, default: 1, input_html: {class: 'requeriment_type'} %>
+      <div class="row-fluid"><div class="span8"><%= f.association :ware_house, collection: current_user.filter_ware_houses, include_blank: "- seleccione almacen -", label_method: :name, input_html: {class: 'span8'} %></div></div>
+    <% end %>
+
+    <table class="table table-striped table-hover table-condensed table-nested">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Grupo</th>
+          <th>SubGrupo</th>
+          <th>Categoria</th>
+          <th>Producto</th>
+          <th>Marca</th>
+          <th>Cantidad</th>
+          <th>Modelo</th>
+          <th>Detalle</th>
+        </tr>
+      </thead>
+      <tbody id="requeriment_items">
+        <%= f.fields_for :requeriment_items, wrapper: false %>
+      </tbody>
+      <tfoot>
+        <td colspan='4'><%= f.link_to_add '<i class="icon-plus"></i> Agregar'.html_safe, :requeriment_items, :data => { :target => "#requeriment_items" } %></td>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="row-fluid"><div class="span12"><%= f.input :observation, input_html: {class: 'span12', rows: '5'}, label: 'Nota:' %></div></div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

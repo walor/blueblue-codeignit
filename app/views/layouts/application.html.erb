@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>San Agustin - Logistica</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= yield :stylesheet_includes%>
+  <%= javascript_include_tag "application" %>
+  <%= yield :javascript_includes%>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar-fixed-top">
+    <div class="header ">
+      <div style="float:left; margin-left: 40px;"><%=link_to image_tag('logosa.jpg'), root_path%></div>
+      <div class="header_right">
+      </div>
+    </div>
+	<div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="nav-collapse collapse">
+            <%if current_user %>
+              <p class="navbar-text pull-right">
+                <a href="#" class="navbar-link"><%= current_user.name %></a>
+              </p>
+            <%end%>
+            <%= render 'layouts/menu' %>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+  </div>
+ </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <%= yield %>
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+
+          <div class="main">
+        <div class="footer-bg">
+          <p class="prev-indent-bot">Emilse Ormeno</p>
+
+                </div>
+      </div>
+
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+</body>
+</html>

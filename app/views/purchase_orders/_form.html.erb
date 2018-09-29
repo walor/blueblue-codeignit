@@ -1,0 +1,96 @@
+<div class="row-fluid">
+  <div class="span12">
+    <p class="text-center font-header"><strong>COTIZACIÓN GANADORA Nro. <%= @quotation.name%></strong></p>
+    <div class="span12">
+      <div class="span4"><strong>Nro de requerimiento:</strong></div>
+      <div class="span8"><%= link_to @quotation.requeriment.name, @quotation.requeriment %></div>
+    </div>
+    <div class="span12">
+      <div class="span4"><strong>Nro Cotización:</strong></div>
+      <div class="span8"><%= link_to @quotation.name, @quotation %></div>
+    </div>
+    <div class="span12">
+      <div class="span4"><strong>Proveedor:</strong></div>
+      <div class="span8"><%= @quotation.provider.name %></div>
+    </div>
+
+    <div class="span12">
+      <div class="span4"><strong>Telefono:</strong></div>
+      <div class="span8"><%= @quotation.provider.phone %></div>
+    </div>
+
+    <div class="span12">
+      <div class="span4"><strong>Direccion:</strong></div>
+      <div class="span8"><%= @quotation.provider.address %></div>
+    </div>
+
+    <div class="span12">
+      <div class="span4"><strong>RUC:</strong></div>
+      <div class="span8"><%= @quotation.provider.ruc %></div>
+    </div>
+    <div class="span12">
+      <div class="span4"><strong>Fecha de cotizacion:</strong></div>
+      <div class="span8"><%= l(@quotation.created_at) %></div>
+    </div>
+
+    <table class="table table-striped table-condensed">
+      <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Unidad</th>
+        <th>Precio Unit.</th>
+        <th>Precio Total</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Detalle</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @quotation.quotation_items.each do |item| %>
+        <% if item.winner %>
+          <tr>
+            <td><%= item.product.description %></td>
+            <td><%= item.quantity%></td>
+            <td><%= item.product.measurement_unit_name %></td>
+            <td><%= number_to_currency(item.cost_unit) %></td>
+            <td><%= number_to_currency(item.cost_total) %></td>
+            <td><%= item.brand.try(:description) %></td>
+            <td><%= item.model %></td>
+            <td><%= item.detail %></td>
+          </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="span12">
+      <div class="span2"><strong>Validez</strong></div>
+      <div class="span9"><%= @quotation.validity%></div>
+    </div>
+    <div class="span12">
+      <div class="span2"><strong>Entrega</strong></div>
+      <div class="span9"><%=@quotation.delivery%></div>
+    </div>
+    <div class="span12">
+      <div class="span2"><strong>Forma de pago</strong></div>
+      <div class="span9"><%=@quotation.pay_form%></div>
+    </div>
+
+    <div class="span12">
+      <div class="span2"><strong>Observaciones</strong></div>
+      <div class="span9"><%= simple_format @quotation.observations%></div>
+    </div>
+
+  </div>
+</div>
+
+<%= simple_form_for(@purchase_order, :html => {:class => 'form-horizontal' }) do |f| %>
+    <%= f.error_notification %>
+    <% if @quotation.id %>
+      <%= f.input :quotation_id, as: :hidden, input_html: { value: @quotation.id } %>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>

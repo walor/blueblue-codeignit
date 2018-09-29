@@ -1,0 +1,14 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<p id="notice"><%= notice %></p>
+
+	<%= render @requeriment %>
+  <% if @requeriment.status == Requeriment::NORMAL %>
+	 <%= edit_button(edit_requeriment_path(@requeriment)) if can? :edit, @requeriment %>
+	 <%= destroy_button @requeriment %>
+  <% elsif current_user.administrator? || current_user.super_admin? %>
+    <%= edit_button(edit_requeriment_path(@requeriment)) if can? :edit, @requeriment %>
+    <%= destroy_button @requeriment %>
+  <% end %>
+	<%= print_button @requeriment %>
+</div>

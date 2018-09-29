@@ -1,0 +1,21 @@
+<tr class='row_item fields'>
+  <td><%= f.link_to_remove '<i class="icon-minus"></i>'.html_safe %></td>
+  <td>
+    <%= f.input :group_id, collection: @groups.map{|m| [m.description, m.id]}, label: false, input_html: {class: 'filter_group'}, prompt: '- Seleccione una opcion -' %>
+  </td>
+  <td>
+    <%= f.input :sub_group_id, collection: SubGroup.by_group(f.object.group_id).map{|m| [m.description, m.id]}, label: false, input_html: {class: 'filter_sub_group'} %>
+  </td>
+  <td>
+    <%= f.input :category_id, collection: Category.by_sub_group(f.object.sub_group_id).map{|m| [m.description, m.id]}, label: false, input_html: {class: 'filter_category'} %>
+  </td>
+  <td>
+    <%= f.association :product, collection: Product.by_category(f.object.category_id).map{|m| [m.description, m.id]}, label: false, input_html: {class: 'filter_product'} %>
+  </td>
+  <td>
+    <%= f.association :brand, collection: Brand.all.map{|m| [m.description, m.id]}, label: false, input_html: {class: 'filter_brand'}, prompt: ' - seleccione una opcion -' %>
+  </td>
+  <td><%= f.input :quantity, label: false, wrapper: false %></td>
+  <td><%= f.input :model, label: false, wrapper: false %></td>
+  <td><%= f.input :detail, label: false, wrapper: false, input_html: {cols: 10, rows: 2} %></td>
+</tr>

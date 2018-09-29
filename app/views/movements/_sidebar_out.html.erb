@@ -1,0 +1,9 @@
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">Acciones</li>
+      <%=nav_link('Salida Ord. Compra', pending_incoming_purchases_movements_path) if can? :pending_incoming_purchases, Movement%>
+      <%= nav_link('Salidas', own_ware_houses_path(operation_type: 'salidas')) %>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->

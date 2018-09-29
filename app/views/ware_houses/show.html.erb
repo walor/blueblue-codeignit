@@ -1,0 +1,42 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <b>Nombre:</b>
+	  <%= @ware_house.name %>
+  </p>
+
+  <p>
+    <b>Descripción:</b>
+    <%= @ware_house.description %>
+  </p>
+
+  <p>
+    <b>Dirección:</b>
+    <%= @ware_house.address %>
+  </p>
+
+  <p>
+    <b>Teléfono:</b>
+    <%= @ware_house.telephone %>
+  </p>
+
+  <p>
+    <b>Área:</b>
+    <%= @ware_house.area.name %>
+  </p>
+
+	<p>
+	  <b>Responsable:</b>
+	  <%= @ware_house.responsible.name %>
+	</p>
+
+  <p>
+    <b>Incial:</b>
+    <%= t @ware_house.initial %>
+  </p>
+
+	<%= edit_button edit_ware_house_path(@ware_house) %>
+	<%= destroy_button @ware_house %>
+</div>

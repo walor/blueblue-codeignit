@@ -1,0 +1,144 @@
+es:
+  sure: "¿Está seguro de eliminar el registro?"
+  data_created: "La información fue creada con éxito."
+  data_updated: "La información fue actualizada con éxito."
+  time:
+    formats:
+      default: '%d/%m/%Y %H:%M'
+  helpers:
+    submit:
+      create: "Crear %{model}"
+      update: "Actualizar %{model}"
+  activerecord:
+    models:
+      provider: Proveedor
+      ware_house: Almacen
+      product: Producto
+      movement: Movimiento
+      user: Usuario
+      quotation: Cotización
+      purchase_order: Orden
+      requeriment: Requerimiento
+      group: Grupo
+      sub_group: Sub grupo
+      category: Categoría
+      brand: Marca
+      input_note: Nota de entrada
+      setting_main: Configuracion
+    attributes:
+      provider:
+        name: Razón social
+        address: Dirección
+        phone: Teléfono
+        resposible: Contacto
+        ruc: R.U.C.
+        first_name: Nombre
+        last_name: Apellido paterno
+        maiden_name: Apellido materno
+        cellphone: Telefono celular
+        observations: observaciones
+        type_company: Tipo de empresa
+        type_provider: Tipo de proveedor
+        group: Grupo
+        sub_group: Sub grupo
+        category: Categoría
+        position: Cargo
+
+      ware_house:
+        name: Nombre
+        description: Descripción
+        address: Dirección
+        telephone: Teléfono/Anexo
+        responsible_id: Responsable
+        cost_center: Centro de costos
+        initial: Inicial
+      product:
+        name: Nombre
+        description: Descripción
+        stock_min: Stock mínimo
+        stock_max: Stock máximo
+        serial_number: Número de serie
+        restock: Reposición de Stock
+        measurement_unit: Unidad de medida
+        model: Modelo
+        group: Grupo
+        sub_group: Sub grupo
+        category: Categoría
+      movement:
+        date: Fecha
+        ware_house: Almacén
+        provider: Proveedor
+        product: Producto
+        quantity: Cantidad
+        movement_type: Tipo de movimiento
+        receiver: Entregado a
+        doc_ref: Guia de remisión
+        invoice_number: Número de factura
+        invoice_date: Fecha de factura
+        observation: Observaciones
+        serial: Número de serie de la factura
+        document_type: Tipo de documento
+      user:
+        firstname: Nombres
+        lastname: Apellidos
+        password: Contraseña
+        password_confirmation: Confirmar contraseña
+        email: Email
+        role: Perfil
+      quotation:
+        provider: Proveedor
+        observations: Observaciones
+        validity: Validez
+        delivery: Tiempo de entrega
+        pay_form: Forma de pago
+      purchase_order:
+        provider: Proveedor
+        date: Fecha
+      requeriment:
+        deadline: Fecha de entrega limite
+        description: Descripción
+        reference: Referencia
+        ware_house: Almacén
+        observation: Observación
+        type_requeriment: Tipo de Requerimiento
+      area:
+        name: Nombre
+        code: Código
+      group:
+        name: codigo
+        description: Nombre
+        type_group: Tipo
+      sub_group:
+        name: codigo
+        description: Nombre
+        group: Grupo
+      category:
+        name: codigo
+        description: Nombre
+        sub_group: SubGrupo
+      brand:
+        name: Nombre
+        description: Nombre
+        group: Grupo
+        sub_group: Sub grupo
+        long_description: Descripción
+        observation: Observaciones
+      setting_main:
+        name: Nombre
+        phone: Telefono
+        address: Direccion
+        ruc: RUC
+      input_note:
+        name: Nombre
+        provider: Proveedor
+        date: Fecha de compra
+        ware_house: Almacén
+        receiver: Entregado a
+        observation: Observaciones
+        movement_type: Tipo de movimiento
+        serial: Número serie
+        destination: Destino
+        document_type: Tipo de documento
+        area_origin: Area de origen
+        area_destination: Area de destino
+        doc_ref: Documento de referencia

@@ -1,0 +1,5 @@
+<%unless @product%>
+	$("#product_id").html("<%=j options_from_collection_for_select(@products, :id, :name)%>");
+<%else%>
+	$("#result").html("<%=j render('kardex') %>");
+<%end%>

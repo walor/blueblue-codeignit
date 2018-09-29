@@ -1,0 +1,80 @@
+<%=render 'sidebar'%>
+<div class="span9">
+  <h3 class='text-center'>Requerimientos</h3>
+
+  <%= simple_form_for(@search, html: {class: 'form-search' }) do |f|%>
+    <%= f.label :name_contains, "Nombre: " %>
+    <%= f.text_field :name_contains, class: 'search-query'%>
+    <button type="submit" class="btn">Buscar</button>
+  <% end %>
+
+  <table class="table table-striped table-hover table-condensed">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo de requerimiento</th>
+      <th>Almacén</th>
+      <th>Estado</th>
+      <th>Ver</th>
+      <th>Editar</th>
+      <th>Borrar</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @requeriments.each do |requeriment| %>
+      <% if (requeriment.area.id == current_user.area_id) || current_user.super_admin? %>
+        <tr>
+          <td><%= requeriment.name %></td>
+          <td><%= requeriment.type_text %></td>
+
+          <% if current_user.administrator? || current_user.super_admin? %>
+            <% if requeriment.ware_house %>
+              <td><%= requeriment.ware_house.name %></td>
+            <% else %>
+              <% if requeriment.type_requeriment == Requeriment::GOODS %>
+                <%=simple_form_for(@req,:url => "/requeriments/#{requeriment.id}", html: {class: 'form-search' }) do |f|%>
+                    <td><%= f.collection_select(:ware_house_id , WareHouse.all, :id, :name, prompt: true) %>
+                      <button type="submit" class="btn">Asignar</button>
+                    </td>
+                <% end %>
+                <% else %>
+                  <td></td>
+                <% end %>
+            <% end %>
+            <% if requeriment.status == Requeriment::NORMAL %>
+              <td><%= link_to_if(can?(:change, requeriment), requeriment.status_text.to_s, status_change_requeriment_path(requeriment))%></td>
+            <% else %>
+              <th><%= requeriment.status_text %></th>
+            <% end %>
+          <% else %>
+            <% if requeriment.ware_house %>
+                <td><%= requeriment.ware_house.name %></td>
+            <% else %>
+                <td>No asignado</td>
+            <% end %>
+            <th><%= requeriment.status_text %></th>
+          <% end %>
+
+          <td><%= show_link requeriment %></td>
+          <% if requeriment.status == Requeriment::NORMAL %>
+            <td><%= edit_link(edit_requeriment_path(requeriment)) if can? :edit, requeriment %></td>
+            <td><%= destroy_link requeriment%></td>
+          <% else %>
+              <% if current_user.administrator? || current_user.super_admin? %>
+                  <td><%= edit_link(edit_requeriment_path(requeriment)) if can? :edit, requeriment %></td>
+                  <td><%= destroy_link requeriment%></td>
+              <% else %>
+                  <td></td>
+                  <td></td>
+              <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @requeriments %>
+
+</div>

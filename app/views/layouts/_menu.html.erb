@@ -1,0 +1,63 @@
+<% if current_user %>
+<ul class="nav nav-pills">
+  <% if can? :manage, User%>
+  <li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuarios<b class="caret"></b></a>
+    <ul class="dropdown-menu" id="menu1">
+      <li class="<%=active_menu('users')%>"><%=link_to('Usuarios', users_url) if can? :manage, User%></li>
+    </ul>
+  </li>
+  <% end %>
+
+  <li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Logistica<b class="caret"></b></a>
+    <ul class="dropdown-menu" id="menu1">
+      <li class="<%=active_menu('requeriments')%>"><%=link_to('Requerimientos', requeriments_url) if can? :read, Requeriment%></li>
+      <li class="<%=active_menu('quotations')%>"><%=link_to('Cotizaciones', quotations_url) if can? :manage, Quotation%></li>
+      <li class="<%=active_menu('purchase_orders')%>"><%=link_to('Ordenes', purchase_orders_url) if can? :manage, PurchaseOrder%></li>
+      <li class="divider"></li>
+    </ul>
+  </li>
+
+  <% unless current_user.user? %>
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Almacen<b class="caret"></b></a>
+      <ul class="dropdown-menu" id="menu1">
+        <li class="<%=active_menu('movements')%>"><%=link_to('Movimientos', movements_url) %></li>
+        <li><%=nav_link('Ingresos', purchase_orders_movements_path) if can? :purchase_orders, Movement%></li>
+        <li><%= nav_link('Salidas', own_ware_houses_path(operation_type: 'salidas')) %></li>
+        <li class="divider"></li>
+        <li><%= nav_link('Inventario Inicial', own_ware_houses_path(operation_type: 'initial')) %></li>
+        <li><%= nav_link('Inventario Fisico', own_ware_houses_path(operation_type: 'fisico')) %></li>
+        <li><%= nav_link('kardex', movement_items_path) %></li>
+      </ul>
+    </li>
+  <% end %>
+
+  <li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Mantenimiento<b class="caret"></b></a>
+    <ul class="dropdown-menu" id="menu1">
+      <li class="<%=active_menu('groups')%>"><%=link_to('Grupo', groups_url) if can? :manage, Group%></li>
+      <li class="<%=active_menu('sub_groups')%>"><%=link_to('SubGrupo', sub_groups_url) if can? :manage, SubGroup%></li>
+      <li class="<%=active_menu('categories')%>"><%=link_to('Categoria', categories_url) if can? :manage, Category%></li>
+      <li class="<%=active_menu('products')%>"><%=link_to('Producto', products_url) if can? :manage, Product%></li>
+      <li class="<%=active_menu('brands')%>"><%=link_to('Marca', brands_url) if can? :manage, Brand%></li>
+      <li class="<%=active_menu('providers')%>"><%=link_to('Proveedor', providers_url) if can? :manage, Provider%></li>
+      <li class="<%=active_menu('ware_houses')%>"><%=link_to('Almacen', ware_houses_url) if can? :manage, WareHouse%></li>
+      <li class="<%=active_menu('areas')%>"><%=link_to('Áreas', areas_url) if can? :manage, Area %></li>
+      <li class="<%=active_menu('setting_mains')%>"><%=link_to('Configuracion', setting_main_url(SettingMain.first)) if can? :manage, SettingMain %></li>
+      <li class="divider"></li>
+    </ul>
+  </li>
+
+
+  <%if current_user%>
+      <li><%=link_to "Cerrar sesion", destroy_user_session_path, method: :delete %></li>
+  <%end%>
+</ul>
+
+<% else %>
+    <ul class="nav">
+      <li><a href="#">Inicio<b class="caret"></b></a></li>
+    </ul>
+<% end %>

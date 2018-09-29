@@ -1,0 +1,27 @@
+<%=render 'sidebar'%>
+<div class="span9">
+  <h3 class='text-center'>Requerimientos Pendientes</h3>
+  <table class="table table-striped table-hover table-condensed table-nested">
+    <thead>
+    <tr>
+      <th>Nro requerimiento</th>
+      <th>Cantidad de Cotizaciones</th>
+      <th>Cotizaciones recibidas</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @requeriments.each do |requeriment| %>
+        <% if requeriment['area_id'] == current_user.area_id || current_user.role_id == 1 %>
+            <tr>
+              <td><%= requeriment['name'] %></td>
+              <th><%= requeriment['all_quotations'] %> </th>
+              <th><%= requeriment['closed_quotations'] %></th>
+              <td><%= link_to 'cotizar', new_requeriment_quotation_path(requeriment['id']) %> / <%= link_to  'Cerrar', status_change_requeriment_path(requeriment)%></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+
+  </table>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  movement: 
+  product: 
+  quantity: 1.5
+  price_unit: 1.5
+
+two:
+  movement: 
+  product: 
+  quantity: 1.5
+  price_unit: 1.5

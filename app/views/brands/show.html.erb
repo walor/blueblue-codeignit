@@ -1,0 +1,17 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <b>Nombre:</b>
+	  <%= @brand.name %>
+	</p>
+
+	<p>
+	  <b>Descripción:</b>
+	  <%= @brand.description %>
+	</p>
+
+  <%= edit_button edit_product_path(@brand) %>
+	<%= destroy_button @brand %>
+</div>

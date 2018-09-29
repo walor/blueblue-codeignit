@@ -1,0 +1,34 @@
+<%= simple_form_for(@movement, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%if @movement_types%>
+      <div class="row-fluid"><div class="span12"><%= f.association :movement_type, collection: @movement_types, input_html: {class: 'my_select2 span12'} %></div></div>
+    <%end%>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <%= f.association(:ware_house, collection: @ware_houses, input_html: {class: 'my_select2 span12'}) %>
+      </div>
+    </div>
+    <% if current_user.administrator? %>
+      <div class="row-fluid"><div class="span12"><%= f.association(:provider, input_html: {class: 'my_select2 span12'}) %></div></div>
+    <%end%>
+
+    
+    <%= f.association :receiver, input_html: {class: 'my_select2'} %>
+    <%= f.association :emisor %>
+    
+    <%= f.association :product %>
+    <%= f.input :quantity %>
+    <%= f.input :status if current_user.administrator? %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<script>
+  $(document).ready(function() { $(".my_select2").select2(); });
+</script>

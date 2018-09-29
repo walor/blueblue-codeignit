@@ -1,0 +1,9 @@
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">Acciones</li>
+      <%=nav_link('Requerimientos', requeriments_path)%>
+      <%=nav_link('Nuevo', new_requeriment_path) if can? :create, Requeriment%>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->

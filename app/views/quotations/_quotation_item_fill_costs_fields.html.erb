@@ -1,0 +1,8 @@
+<tr>
+	<td><%= f.object.product.description %><%=f.input :product_id, as: :hidden%></td>
+	<td><%= f.object.quantity%></td>
+	<td><%= f.input :cost_unit, label: false, wrapper: false, input_html: {class: 'span10'}%></td>
+  <td><%= f.object.brand.try(:description) %></td>
+  <td><%= f.object.model %></td>
+  <td><%= f.object.detail %></td>
+</tr>

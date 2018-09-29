@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ware_house: 
+  product: 
+  movement_type: 
+  quantity: 1.5
+  emisor_id: 1
+  receiver_id: 1
+
+two:
+  ware_house: 
+  product: 
+  movement_type: 
+  quantity: 1.5
+  emisor_id: 1
+  receiver_id: 1

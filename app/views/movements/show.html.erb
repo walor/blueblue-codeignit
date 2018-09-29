@@ -1,0 +1,9 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<p id="notice"><%= notice %></p>
+
+	<%= render @movement %>
+
+	<%= print_button @movement %>
+	<%#= destroy_button @movement %>
+</div>

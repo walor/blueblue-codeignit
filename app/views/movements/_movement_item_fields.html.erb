@@ -1,0 +1,14 @@
+<tr  class='row_item fields'>
+  <td><%= f.link_to_remove '<i class="icon-minus"></i>'.html_safe %></td>
+  <td>
+    <%= f.association :product, collection: @products.map{|m| [m.description, m.id]}, label: false, wrapper: false, input_html: {class: 'product_out'} %>
+  </td>
+  <td class='stock_product'></td>
+  <td><%= f.input :quantity, label: false, wrapper: false, input_html: {class: 'quantity_product'}%></td>
+  <td>
+    <%= f.association :brand, collection: Brand.all.map{|m| [m.description, m.id]}, label: false, input_html: {class: 'filter_brand'}, prompt: ' - seleccione una opcion -' %>
+  </td>
+  <td><%= f.input :model, label: false, wrapper: false %></td>
+  <td><%= f.input :detail, label: false, wrapper: false, input_html: {cols: 10, rows: 2} %></td>
+  <td class='price_unit'><%= f.input :price_unit, label: false, wrapper: false, as: :hidden %></td>
+</tr>

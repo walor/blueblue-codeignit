@@ -1,0 +1,45 @@
+<%=render 'movements/sidebar_out'%>
+<div class="span9">
+	<h3 class='text-center'>Salida de orden de compras</h3>
+
+  <%=simple_form_for(@search, html: {class: 'form-search' }) do |f|%>
+    <%= f.label :name_contains, "Numero" %>
+    <%= f.text_field :name_contains, class: 'search-query'%>
+    <button type="submit" class="btn">Buscar</button>
+  <%end%>
+
+  <table class="table table-striped table-hover table-condensed">
+    <thead>
+      <tr>
+        <th>Orden de Compra</th>
+        <th>Estado</th>
+        <th>Cotizacíon</th>
+        <th>Requerimiento</th>
+        <th>Proveedor</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @purchase_orders.each do |purchase_order| %>
+        <% if purchase_order.quotation.requeriment.area.id == current_user.area_id  || current_user.super_admin? %>
+          <tr>
+            <% name_type = "Salida " if purchase_order.status == PurchaseOrder::PARTIAL_CLOCKED %>
+            <td><%= purchase_order.name %></td>
+            <td><%= "#{name_type}#{purchase_order.status_text}" %></td>
+            <td><%= link_to purchase_order.quotation.name, quotation_path(purchase_order.quotation.id) %></td>
+            <td><%= link_to purchase_order.quotation.requeriment.name, requeriment_path(purchase_order.quotation.requeriment.id) %></td>
+            <td><%= purchase_order.provider.name %></td>
+            <td><%= l(purchase_order.created_at, :format => :default) %></td>
+            <td><%= number_to_currency(purchase_order.total) %></td>
+            <td><%= show_link purchase_order %></td>
+            <td><%= link_to 'salida', new_get_out_purchase_order_movements_path(:purchase_order_id => purchase_order.id) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @purchase_orders %>
+</div>

@@ -1,0 +1,48 @@
+<div class="row-fluid">
+  <div class="span12">
+    <p><strong>CUADRO COMPARTIVO</strong></p>
+    <ul>
+      <li><strong>Nro. Requerimiento: </strong><%= link_to @requeriment.name, @requeriment %></li>
+      <li><strong>Titulo Requerimiento: </strong><%= @requeriment.description %></li>
+    </ul>
+
+    <%= form_tag compare_quotations_path, method: :get do %>
+      <table class="table table-condensed table-background">
+        <thead>
+          <tr>
+            <th colspan="8">Producto</th>
+          </tr>
+          <tr>
+            <th>Proveedor</th>
+            <th>Cotizacion</th>
+            <th>Fecha cotizacion</th>
+            <th>Cantidad</th>
+            <th>Precio Unit.</th>
+            <th>Precio Total</th>
+            <th>Ganador</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr class="success">
+              <td colspan="8"><strong><%= "#{product.description} - #{product.name}" %></strong></td>
+            </tr>
+            <% @quotations_compare.map(&:quotation_items).flatten.select{|i| i.product_id == product.id}.each do |quotation_item|%>
+              <tr>
+                <td><%= quotation_item.quotation.provider.name%></td>
+                <td><%= link_to(quotation_item.quotation.name, quotation_path(quotation_item.quotation))%></td>
+                <td><%=l(quotation_item.quotation.created_at)%></td>
+                <td><%= quotation_item.quantity%></td>
+                <td><%= number_to_currency(quotation_item.cost_unit) %></td>
+                <td><%= number_to_currency(quotation_item.cost_total) %></td>
+                <td><%= radio_button_tag ("quotation_details_"+quotation_item.product.id.to_s+"_id"), quotation_item.id  %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= hidden_field_tag "compare_requeriment_id", params[:requeriment_id] %>
+      <%= submit_tag 'Enviar' %>
+    <%end%>
+  </div>
+</div>

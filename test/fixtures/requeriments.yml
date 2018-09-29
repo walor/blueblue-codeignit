@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ware_house: 
+  responsible_id: 1
+
+two:
+  ware_house: 
+  responsible_id: 1

@@ -1,0 +1,1 @@
+Logistic::Application.config.secret_token = '5cde3f91f26a4408ad96fc636b011b7786a673f0fa2bafbaf98ed224037c6ea664bd55462dfbd47e7a7d32bb5c1fdc93ce9d8f60e24282f51aeb76b7cf3649b8'

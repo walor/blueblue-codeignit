@@ -1,0 +1,25 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<%=form_tag kardex_ware_houses_url, class: "form-horizontal", remote: true, method: :get do |f|%>
+		<div class="row-fluid"><div class="span6"><%=select_tag "id", options_from_collection_for_select(@ware_houses, :id, :name), class: 'my_select2 span12'%></div></div>
+		<div class="row-fluid"><div class="span6"><%=select_tag "product_id", options_from_collection_for_select(@products, :id, :name), class: 'my_select2 span12'%></div></div>
+		<div><%=submit_tag 'Ver'%></div>
+	<%end%>
+</div>
+<div id="result"></div>
+<script>
+	$(function() {
+	  
+	  $('#id').change(function(){
+	  	$('#product_id').html("");
+	    if($(this).val()==''){
+	    	$("#result").html("");
+	    }else{
+	    	$(this).closest('form').submit();
+	    }
+	  });
+
+
+
+	});
+</script>

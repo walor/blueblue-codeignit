@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <%= wicked_pdf_stylesheet_link_tag 'pdf'%>
+     <style>
+      	body *{margin:0px;padding:0px;}
+    </style>
+
+  </head>
+  <body>
+    <%= wicked_pdf_image_tag('logosa.jpg')%>
+    <br/><br/>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="text-center font-header"><strong>COTIZACION Nro. <%=@quotation.name%></strong></p>
+        <br/>
+        <br/>
+        <%= @quotation.created_at %>
+        <br/>
+        <br/>
+        <p>Señores:</p>
+        <p><strong><%= @quotation.provider.name %></strong></p>
+        <br/><br/>
+        Por medio de la presente...<br/><br/>
+
+        <table class="table table-condensed table-bordered">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%@quotation.quotation_items.each_with_index do |item, i|%>
+              <tr>
+                <td><%=i + 1%></td>
+                <td><%=item.product.name%></td>
+                <td><%=item.quantity%></td>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+        <div class="span12">
+          <div class="span2"><strong>Observaciones</strong></div>
+          <div class="span9"><%= simple_format @quotation.observations%></div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

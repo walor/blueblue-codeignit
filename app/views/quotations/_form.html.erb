@@ -1,0 +1,33 @@
+<%= simple_form_for(@quotation) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :provider, input_html: {class: 'my_select2 span6'} %>
+    <table class="table table-striped table-hover table-condensed table-nested">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Unidad</th>
+        <th>Modelo</th>
+        <th>Marca</th>
+        <th>Detalle</th>
+        <th>¿Quitar?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.simple_fields_for :quotation_items do |quotation_item_form| %>
+        <%= render 'quotation_item_fields', f: quotation_item_form %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= f.input :observations, input_html: {class: 'span12', rows: 5}%>
+    <% if @requeriment_id %>
+        <%= f.input :requeriment_id, :as => :hidden, :input_html => { :value => @requeriment_id }%>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

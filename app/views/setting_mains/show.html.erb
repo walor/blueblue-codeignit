@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @setting_main.name %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%= @setting_main.phone %>
+</p>
+
+<p>
+  <b>Ruc:</b>
+  <%= @setting_main.ruc %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%= @setting_main.address %>
+</p>
+
+<%= link_to 'Editar', edit_setting_main_path(@setting_main) %>

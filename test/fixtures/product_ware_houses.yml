@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product: 
+  ware_house: 
+  current_stock: 1.5
+
+two:
+  product: 
+  ware_house: 
+  current_stock: 1.5

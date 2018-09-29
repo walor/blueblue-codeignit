@@ -1,0 +1,92 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require scaffolds
+ *= require bootstrap_and_overrides
+ *= require_self
+ */
+.font-header{
+	font-size: 18px;
+}
+
+.table-background thead{
+ 	background-color: gray;
+	color: white;
+}
+
+/*.muted a {
+	background:url(logosa.jpg) 0 0 no-repeat;
+}
+*/
+/*@media (max-width: 979px){*/
+body{padding: 30px;}
+/*}*/
+.header{
+	background-color: white;
+	width: 100%;
+	float: left;
+}
+.header_right{
+	float:right;
+}
+
+.header_right .support{
+	font-size: 29px;
+line-height: 1.2em;
+padding: 29px 5px 0 30px;
+letter-spacing: -2px;
+}
+
+.header_right .telcap{
+	font-size: 12px;
+color: #777;
+letter-spacing: 1px;
+line-height: 11px;
+/*font-weight: normal;
+
+text-align: left;
+float: right;
+margin-top: 70px;
+margin-right: -150px;
+*/}
+
+.main{
+/*	width: 1020px;
+padding: 0;
+margin: 0 auto;
+*/
+font-size: 0.875em;
+/*line-height: 1.785em;
+background: #FFF;
+border-left: 15px solid #FFF;
+border-right: 15px solid #FFF;
+*/}
+
+/*.footer-bg {
+width: 100%;
+padding: 18px 0 25px;
+background: #2b2b2b;
+border-radius: 9px;
+-moz-border-radius: 9px;
+-webkit-border-radius: 9px;*/
+
+.table_summary, .table_summary tr,  .table_summary td{
+  margin-top: 20px;
+  border: none !important;
+  line-height: 0px;
+}
+
+.table_summary td {
+  line-height: 12px;
+}
+
+.font-header{
+  font-size: 14px;
+}

@@ -1,0 +1,36 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <b>Nombre:</b>
+	  <%= @product.name %>
+	</p>
+
+	<p>
+	  <b>Descripción:</b>
+	  <%= @product.description %>
+	</p>
+
+  <p>
+    <b>Unidad de medida:</b>
+    <%= @product.measurement_unit_name %>
+  </p>
+  <p>
+    <b>Categoria:</b>
+    <%= @product.category.description %>
+  </p>
+
+
+  <p>
+    <b>SubGrupo:</b>
+    <%= @product.sub_group.description %>
+  </p>
+  <p>
+    <b>Grupo:</b>
+    <%= @product.group.description %>
+  </p>
+
+	<%= edit_button edit_product_path(@product) %>
+	<%= destroy_button @product %>
+</div>

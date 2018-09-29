@@ -1,0 +1,20 @@
+<%= simple_form_for(@product, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= f.input :name, input_html: {class: 'span12'}, disabled: true, label: "Código" %>
+    <%= f.input :description, input_html: {class: 'span12'} %>
+
+    <%= f.association :measurement_unit, input_html: {class: 'span12'}, prompt: "Seleccione una unidad" %>
+    <%= f.association :group, label_method: :description, value_method: :id, input_html: {class: 'span12'}, prompt: "Seleccione un grupo" %>
+    <%= f.association :sub_group, collection: @sub_groups, label_method: :description, value_method: :id, input_html: {class: 'span12'}, disabled: true, prompt: "Seleccione un sub grupo" %>
+
+    <%= f.association :category, collection: @categories, input_html: {class: 'span12'}, disabled: true, prompt: "Seleccione una categoría" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+<script>var entity = "product";</script>

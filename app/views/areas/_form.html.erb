@@ -1,0 +1,13 @@
+<%= simple_form_for(@area, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row-fluid"><div class="span12"><%= f.input :code, input_html: {class: 'span12'} %></div></div>
+    <div class="row-fluid"><div class="span12"><%= f.input :name, input_html: {class: 'span12'} %></div></div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

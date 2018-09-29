@@ -1,0 +1,38 @@
+<%=render 'sidebar'%>
+<div class="span9">
+    <h3 class='text-center'>Usuarios</h3>
+
+    <%=simple_form_for(@search, html: {class: 'form-search' }) do |f|%>
+        <%= f.label :email_or_firstname_or_lastname_contains, "Nombre o Email: " %>
+        <%= f.text_field :email_or_firstname_or_lastname_contains, class: 'search-query'%>
+        <button type="submit" class="btn">Buscar</button>
+    <%end%>
+
+    <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Área</th>
+            <th>Perfil</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%=user.email%></td>
+                <td><%=user.area.name%></td>
+                <td><%=user.role.name%></td>
+                <td><%= show_link user %></td>
+                <td><%= edit_link edit_user_path(user) %></td>
+                <td><%= destroy_link user%></td>
+              </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%=paginate @users%>
+</div>

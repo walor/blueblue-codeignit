@@ -1,0 +1,43 @@
+<%=render 'sidebar'%>
+<div class="span9">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Razón social:</b>
+    <%= @provider.name %>
+  </p>
+
+  <p>
+    <b>Tipo de proveedor:</b>
+    <%= @provider.type_text %>
+  </p>
+
+  <p>
+    <b>Dirección:</b>
+    <%= @provider.address %>
+  </p>
+
+  <p>
+    <b>Teléfono:</b>
+    <%= @provider.phone %>
+  </p>
+
+  <p>
+    <b>Contacto:</b>
+    <%= @provider.resposible %>
+  </p>
+
+  <p>
+    <b>R.U.C.:</b>
+    <%= @provider.ruc %>
+    </p>
+
+  <p>
+    <b>Tipo de empresa:</b>
+    <%= @provider.type_company_text %>
+  </p>
+
+  <%= edit_button edit_provider_path(@provider) %>
+  <%= destroy_button @provider %>
+</div>
+

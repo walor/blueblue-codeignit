@@ -1,0 +1,26 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <b>Nombre:</b>
+	  <%= @user.name %>
+	</p>
+
+	<p>
+	  <b>Email:</b>
+	  <%= @user.email %>
+	</p>
+
+	<p>
+	  <b>Perfil:</b>
+	  <%= @user.role.name %>
+	</p>
+  <p>
+    <b>Área:</b>
+    <%= @user.area.name %>
+  </p>
+
+	<%= edit_button edit_user_path(@user) %>
+	<%= destroy_button @user %>
+</div>

@@ -1,0 +1,56 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th rowspan="2">Fecha</th>
+			<th colspan="3">Entradas</th>
+			<th colspan="3">Salidas</th>
+			<th colspan="3">Existencias</th>
+		</tr>
+		<tr>
+			<th>C</th>
+			<th>VU</th>
+			<th>VT</th>
+			<th>C</th>
+			<th>VU</th>
+			<th>VT</th>
+			<th>C</th>
+			<th>VU</th>
+			<th>VT</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%q = 0%>
+		<%p = pc = 0%>
+		<%@movements.each do |movement_item|%>
+			<tr>
+				<td><%=l movement_item.movement.date%></td>
+				<%if movement_item.movement.movement_type.signal == '+'%>
+					<td><%=movement_item.quantity%><%q += movement_item.quantity%></td>
+					<td><%=movement_item.price_unit || 0%></td>
+					<td><%=movement_item.quantity * (movement_item.price_unit || 0)%></td>
+					<td></td><td></td><td></td>
+					<%
+						pc += movement_item.quantity * (movement_item.price_unit || 0)
+						p = pc / q
+					%>
+					<td><%=q%></td>
+					<td><%=p.round(2)%></td>
+					<td><%=(q * p).round(2)%></td>
+
+				<%else%>
+					<td></td><td></td><td></td>
+					<td><%=movement_item.quantity%><%q -= movement_item.quantity%></td>
+					<td><%=movement_item.price_unit || 0%></td>
+					<td><%=movement_item.quantity * (movement_item.price_unit || 0)%></td>
+					<%
+						pc -= movement_item.quantity * (movement_item.price_unit || 0)
+						p = pc / q
+					%>
+					<td><%=q%></td>
+					<td><%=p.round(2)%></td>
+					<td><%=(q * p).round(2)%></td>
+				<%end%>
+			</tr>
+		<%end%>
+	</tbody>
+</table>

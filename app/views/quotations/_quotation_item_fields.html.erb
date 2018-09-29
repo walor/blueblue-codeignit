@@ -1,0 +1,9 @@
+<tr>
+  <td><%= f.object.product.description %><%=f.input :product_id, as: :hidden %></td>
+  <td class: 'span5'><%= f.input :quantity, label: false, wrapper: false, input_html: {class: 'span9'} %></td>
+  <td><%= f.object.product.measurement_unit_name %></td>
+  <td><%= f.object.model %> <%=f.input :model, as: :hidden %></td>
+  <td><%= f.object.brand.try(:description) %><%=f.input :brand_id, as: :hidden %></td>
+  <td><%= f.object.detail %><%=f.input :detail, as: :hidden %></td>
+  <td><%= f.check_box :_destroy %></td>
+</tr>

@@ -1,0 +1,53 @@
+<div class="span9">
+  <h3 class='text-center'><%= "Inventario fisico - #{@ware_house.name}" %></h3>
+  <%= simple_form_for :product_ware_house, url: update_multiple_product_ware_houses_path, method: :put do |f| %>
+    <table class="table table-striped table-hover table-condensed" id="table_physical">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Conteo fisico</th>
+          <th>Unidad</th>
+          <th>stock</th>
+          <th>stock transito</th>
+          <th>Stock total</th>
+          <% if @compare %>
+            <th>Diferencia</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @product_ware_houses.each do |product_ware_house| %>
+          <%= simple_fields_for "product_ware_houses[]", product_ware_house do |f| %>
+            <tr class='product_ware_house_row'>
+              <td><%= product_ware_house.product.name %></td>
+              <td><%= product_ware_house.product.description %></td>
+              <td><%= f.input :count_physical, label: false, input_html: {class: 'span8'} %></td>
+              <td><%= product_ware_house.product.measurement_unit_name %></td>
+              <td><%= product_ware_house.current_stock %></td>
+              <td><%= product_ware_house.implicate %></td>
+              <% full_stock = product_ware_house.current_stock + product_ware_house.implicate %>
+              <td><%= full_stock %></td>
+              <% if @compare %>
+                <td>
+                  <% different = (product_ware_house.count_physical - full_stock)%>
+                  <% if different < 0 %>
+                    <div class='control-group error'><span class='help-inline'><%= different %></span></div>
+                  <% else %>
+                    <div><span class='help-inline'><%= different %></span></div>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+        <% if @product_ware_houses.present? %>
+          <tr>
+            <td colspan='2'><%= f.button :submit, 'Comparar' %></td>
+            <td colspan='6'><a href="#" id='new_count' class='btn'>Nuevo conteo</a></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

@@ -1,0 +1,10 @@
+<%=render 'sidebar'%>
+<div class="span9">
+	<p id="notice"><%= notice %></p>
+
+	<%=render @quotation%>
+
+	<%= edit_button edit_quotation_path(@quotation) if (@quotation.status == Quotation::NORMAL || @quotation.status == Quotation::SENT) %>
+	<%= destroy_button @quotation %>
+	<%= print_button @quotation %>
+</div>

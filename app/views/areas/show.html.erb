@@ -1,0 +1,16 @@
+<%=render 'sidebar'%>
+<div class="span9">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <b>Código:</b>
+    <%= @area.code %>
+  </p>
+    <p>
+      <b>Nombre:</b>
+      <%= @area.name %>
+    </p>
+
+  <%= edit_button edit_area_path(@area) %>
+  <%= destroy_button @area %>
+</div>
+

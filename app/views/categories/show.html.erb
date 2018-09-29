@@ -1,0 +1,20 @@
+<%=render 'sidebar'%>
+<div class="span9">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <b>Código:</b>
+    <%= @category.name %>
+  </p>
+  <p>
+    <b>Nombre:</b>
+    <%= @category.description %>
+  </p>
+
+  <p>
+    <b>SubGrupo:</b>
+    <%= @category.sub_group.description %>
+  </p>
+
+  <%= edit_button edit_category_path(@category.id) %>
+  <%= destroy_button @category %>
+</div>

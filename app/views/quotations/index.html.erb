@@ -1,0 +1,44 @@
+<%=render 'sidebar'%>
+<div class="span9">
+  <h3 class='text-center'>Cotizaciones</h3>
+  <%= simple_form_for(@search, html: {class: 'form-search' }) do |f| %>
+    <%= f.label :name_or_provider_name_contains, "Numero o Proveedor: " %>
+    <%= f.text_field :name_or_provider_name_contains, class: 'search-query'%>
+    <button type="submit" class="btn">Buscar</button>
+  <% end %>
+
+  <table class="table table-striped table-hover table-condensed">
+    <thead>
+      <tr>
+        <th>Cotización</th>
+        <th>Requerimiento</th>
+        <th>Tipo de Requerimiento</th>
+        <th>Proveedor</th>
+        <th>Estado</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @quotations.each do |quotation| %>
+        <% if quotation.requeriment.try(:area).try(:id) == current_user.area_id || current_user.role_id == 1 %>
+          <tr>
+            <td><%= quotation.name %></td>
+            <td><%= link_to quotation.requeriment.name, requeriment_path(quotation.requeriment.id) %></td>
+            <td><%= quotation.requeriment.type_text %></td>
+            <td><%= quotation.provider.name %></td>
+            <th><%= quotation.status_text.to_s %></th>
+            <td><%= show_link quotation %></td>
+            <td><%= edit_link edit_requeriment_quotation_path(quotation.requeriment.id, quotation) if (quotation.status == Quotation::NORMAL || quotation.status == Quotation::SENT) %></td>
+            <td><%= destroy_link quotation%></td>
+            <% if quotation.status == Quotation::SENT %>
+              <td><%= link_to 'Llenar precios', fill_costs_quotation_path(quotation) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @quotations%>
+</div>
